@@ -7,6 +7,7 @@ const debug = createDebug('bot:dev');
 
 const PORT = (process.env.PORT && parseInt(process.env.PORT, 10)) || 3000;
 const VERCEL_URL = `${process.env.VERCEL_URL}`;
+const BOT_TOKEN = `${process.env.BOT_TOKEN}`;
 
 const production = async (
   req: VercelRequest,
@@ -31,7 +32,7 @@ const production = async (
   if (req.method === 'POST') {
     await bot.handleUpdate(req.body as unknown as Update, res);
   } else {
-    res.status(200).json('Listening to bot events...');
+    res.status(200).json(`Listening to bot events... TOKEN ${BOT_TOKEN}`);
   }
   debug(`starting webhook on port: ${PORT}`);
 };
